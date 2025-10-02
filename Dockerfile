@@ -3,15 +3,16 @@
 # Stage 1: Base build stage
 FROM python:3.13 AS builder
 
-# Clone readme-website
-ADD git@github.com/cmureadme/readme-website.git /readme-website
-
-# Set the working directory
+# Create and set the working directory
+RUN mkdir /readme-website
 WORKDIR /readme-website
 
 # Set environment variables to optimize Python
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+
+# Copy requirements
+COPY ./readme-website/requirements.txt /readme-website/
 
 # Install dependencies
 RUN pip install --upgrade pip
@@ -31,7 +32,7 @@ RUN mkdir /readme-website
 WORKDIR /readme-website
 
 # Copy necessary parts of readme-website
-COPY --from=builder --exclude=.git --exclude=.gitignore --exclude=db_sample.json --exclude=media_sample.zip /readme-website/ .
+COPY --exclude=.git --exclude=.gitignore --exclude=db_sample.json --exclude=*.zip ./readme-website/ .
 
 # Set environment variables to optimize Python
 ENV PYTHONDONTWRITEBYTECODE=1
