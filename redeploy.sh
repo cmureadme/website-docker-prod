@@ -14,7 +14,8 @@ cd /home/readme/readme-website/
 # Pull GH
 printf "Pulling readme-website/\n"
 cd readme-website/
-git pull --no-rebase
+git checkout main
+git pull --no-rebase origin main
 cd ..
 
 # Rebuild the docker image
@@ -27,11 +28,11 @@ printf "Bringing website down\n"
 docker compose down django
 
 # Back stuff up
-printf "Backing media up \n"
+printf "Backing media up\n"
 ./backup.sh
 
 # Bring site back up
-printf "Bringing website up"
+printf "Bringing website up\n"
 docker compose up -d
 
-printf "Done"
+printf "Done\n"

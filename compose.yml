@@ -17,5 +17,6 @@ services:
             - ./nginx.conf:/etc/nginx/nginx.conf:ro
             - ./staticfiles:/staticfiles:ro
             - ./media:/media:ro
+            - ./sample_dbs:/sample_dbs:ro
         depends_on:
             - django

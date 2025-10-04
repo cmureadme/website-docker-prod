@@ -32,7 +32,7 @@ RUN mkdir /readme-website
 WORKDIR /readme-website
 
 # Copy necessary parts of readme-website
-COPY --exclude=.git --exclude=.gitignore --exclude=db_sample.json --exclude=*.zip ./readme-website/ .
+COPY --exclude=.git --exclude=.gitignore ./readme-website/ .
 
 # Set environment variables to optimize Python
 ENV PYTHONDONTWRITEBYTECODE=1
