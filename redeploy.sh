@@ -25,7 +25,7 @@ yes | docker image prune
 
 # Bring the site down
 printf "Bringing website down\n"
-docker compose down django
+docker compose down
 
 # Back stuff up
 printf "Backing media up\n"
