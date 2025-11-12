@@ -12,11 +12,11 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # Copy requirements
-COPY ./readme-website/requirements.txt /readme-website/
+COPY ./readme-website/requirements-host.txt /readme-website/
 
 # Install dependencies
 RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements-host.txt
 
 # Stage 2: Production stage
 FROM python:3.13-slim
