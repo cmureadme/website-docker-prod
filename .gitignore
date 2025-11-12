@@ -2,6 +2,7 @@ readme-website/
 
 db.sqlite3
 media/
+static/
 sample_dbs/
 
 .env

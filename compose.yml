@@ -5,6 +5,7 @@ services:
             - "8000"
         volumes:
             - ./.env:/readme-website/.env
+            - ./static:/readme-website/staticfiles
             - ./media:/readme-website/media
             - ./db.sqlite3:/readme-website/db.sqlite3
         restart: unless-stopped
@@ -15,7 +16,7 @@ services:
             - "8000:80"
         volumes:
             - ./nginx.conf:/etc/nginx/nginx.conf:ro
-            - ./readme-website/static:/static:ro
+            - ./static:/static:ro
             - ./media:/media:ro
             - ./sample_dbs:/sample_dbs:ro
         depends_on:
