@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# Collect staticfiles
-python3 manage.py collectstatic --no-input
+# Migrate database
 python3 manage.py migrate
 
 # Start gunicorn
-gunicorn --bind 0.0.0.0:8000 readme_website.wsgi
+DJANGO_SETTINGS_MODULE='readme_website.settings.prod' gunicorn --bind 0.0.0.0:8000 readme_website.wsgi

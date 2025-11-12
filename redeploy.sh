@@ -3,19 +3,14 @@
 # Script to automate taking the website down and rebuilding it
 # I got too lazy to even run the like 4 commands this does (shout out automation)
 
-
 # Make script terminate on error
 set -e
-
-# Go into the readme-website folder
-
-cd /home/readme/readme-website/
 
 # Pull GH
 printf "Pulling readme-website/\n"
 cd readme-website/
 git checkout main
-git pull --no-rebase origin main
+git pull --ff-only origin main
 cd ..
 
 # Rebuild the docker image
