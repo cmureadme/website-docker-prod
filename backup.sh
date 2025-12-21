@@ -40,7 +40,7 @@ else
     printf "\nBacking up db...\n" >&2
     rsync -av "${db}" "${backup_dir}/${backup_id}/"
     printf "\nBacking up media...\n" >&2
-    rsync -av --delete --link-dest="${backup_dir}/${last_backup_id}/media" "${media}" "${backup_dir}/${backup_id}/media"
+    rsync -av --delete --link-dest="${backup_dir}/${last_backup_id}/media/" "${media}/" "${backup_dir}/${backup_id}/media/"
 
     printf "%s %s\n" > "${backup_dir}/${backup_id}/timestamp.txt" "${cur_date}" "${cur_time}"
 fi
