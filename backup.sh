@@ -3,10 +3,10 @@
 set -e
 
 # Database to back up
-db="/home/readme/readme-website/db.sqlite3"
+db="/home/readme/website-docker-prod/db.sqlite3"
 
 # Media folder to back up
-media="/home/readme/readme-website/media"
+media="/home/readme/website-docker-prod/media"
 
 # Directory containing backups
 backup_dir='/var/lib/readme-website/backups'
