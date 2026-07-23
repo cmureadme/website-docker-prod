@@ -36,45 +36,49 @@ sqlite3 sample_db.sqlite3 "DELETE FROM django_session;"
 sqlite3 sample_db.sqlite3 <<EOF
 PRAGMA foreign_keys = ON;
 
--- Delete article images
+BEGIN;
+
+CREATE TEMP TABLE issues_to_delete AS
+SELECT id
+FROM magazine_issue
+WHERE vol NOT IN ($KEEP_VOLUMES);
+
 DELETE FROM magazine_articleimage
 WHERE show_id IN (
     SELECT id
     FROM magazine_article
-    WHERE issue_id IN (
-        SELECT id
-        FROM magazine_issue
-        WHERE vol NOT IN ($KEEP_VOLUMES)
-    )
+    WHERE issue_id IN (SELECT id FROM issues_to_delete)
 );
 
--- Delete articles
+DELETE FROM magazine_article_authors
+WHERE article_id IN (
+    SELECT id
+    FROM magazine_article
+    WHERE issue_id IN (SELECT id FROM issues_to_delete)
+);
+
+DELETE FROM magazine_imagegag_artists
+WHERE imagegag_id IN (
+    SELECT id
+    FROM magazine_imagegag
+    WHERE issue_id IN (SELECT id FROM issues_to_delete)
+);
+
 DELETE FROM magazine_article
-WHERE issue_id IN (
-    SELECT id
-    FROM magazine_issue
-    WHERE vol NOT IN ($KEEP_VOLUMES)
-);
+WHERE issue_id IN (SELECT id FROM issues_to_delete);
 
--- Delete image gags
 DELETE FROM magazine_imagegag
-WHERE issue_id IN (
-    SELECT id
-    FROM magazine_issue
-    WHERE vol NOT IN ($KEEP_VOLUMES)
-);
+WHERE issue_id IN (SELECT id FROM issues_to_delete);
 
--- Delete rejected headlines
 DELETE FROM magazine_rejectedheadline
-WHERE issue_id IN (
-    SELECT id
-    FROM magazine_issue
-    WHERE vol NOT IN ($KEEP_VOLUMES)
-);
+WHERE issue_id IN (SELECT id FROM issues_to_delete);
 
--- Finally delete the issues
 DELETE FROM magazine_issue
-WHERE vol NOT IN ($KEEP_VOLUMES);
+WHERE id IN (SELECT id FROM issues_to_delete);
+
+DROP TABLE issues_to_delete;
+
+COMMIT;
 EOF
 
 # All of the corresponding media
