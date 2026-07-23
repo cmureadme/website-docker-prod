@@ -18,6 +18,8 @@ mkdir -p "sample_dbs/$dirname"
 # Make the sample database (copies from the production database)
 cp db.sqlite3 sample_db.sqlite3
 
+echo "Deleting unneeded data"
+
 # Deletes sensitive data
 sqlite3 sample_db.sqlite3 "DELETE FROM auth_user;"
 sqlite3 sample_db.sqlite3 "DELETE FROM auth_group;"
@@ -80,6 +82,8 @@ DROP TABLE issues_to_delete;
 
 COMMIT;
 EOF
+
+echo "tarring media"
 
 # All of the corresponding media
 tar_paths=("media/author_images")
