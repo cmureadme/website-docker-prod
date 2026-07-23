@@ -22,7 +22,7 @@ cp db.sqlite3 sample_db.sqlite3
 sqlite3 sample_db.sqlite3 "DELETE FROM auth_user;"
 sqlite3 sample_db.sqlite3 "DELETE FROM auth_group;"
 sqlite3 sample_db.sqlite3 "DELETE FROM auth_permission;"
-sqlite3 sample_db.sqlite3 "DELETE FROM auth_group_permission;"
+sqlite3 sample_db.sqlite3 "DELETE FROM auth_group_permissions;"
 sqlite3 sample_db.sqlite3 "DELETE FROM auth_user_groups;"
 sqlite3 sample_db.sqlite3 "DELETE FROM auth_user_user_permissions;"
 
