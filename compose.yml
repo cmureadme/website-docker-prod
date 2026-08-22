@@ -7,9 +7,9 @@ services:
             - ./.env:/readme-website/.env
             - ./static:/readme-website/staticfiles
             - ./media:/readme-website/media
+            - ./temp_uploads:/readme-website/temp_uploads
             - ./db.sqlite3:/readme-website/db.sqlite3
         restart: unless-stopped
-
     nginx:
         image: nginx:latest
         ports:
@@ -21,3 +21,12 @@ services:
             - ./sample_dbs:/sample_dbs:ro
         depends_on:
             - django
+    cleanup:
+        build: .
+        entrypoint: ["/cron-entrypoint.sh"]
+        volumes:
+            - ./.env:/readme-website/.env
+            - ./temp_uploads:/readme-website/temp_uploads
+            - ./db.sqlite3:/readme-website/db.sqlite3
+            - ./logs:/readme-website/logs
+        restart: unless-stopped

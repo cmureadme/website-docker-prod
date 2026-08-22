@@ -40,6 +40,8 @@ ENV PYTHONUNBUFFERED=1
 
 # Copy entrypoint.sh
 COPY --chmod=755 ./entrypoint.sh /entrypoint.sh
+# Copy cron-entrypoint.sh
+COPY --chmod=755 ./cron-entrypoint.sh /cron-entrypoint.sh
 
 # Expose the application port
 EXPOSE 8000
